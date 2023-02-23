@@ -1,0 +1,1 @@
+# sveltkit-fastapi-wiki-examples
