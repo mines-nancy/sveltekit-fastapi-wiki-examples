@@ -1,10 +1,13 @@
 <html lang="fr">
     <h1>Exemples wiki SvelteKit</h1>
     <p>Toutes les explications se trouvent en commentaire dans le code</p>
-    <h3>1.Création d'un formulaire simple</h3>
+    <h3>1.Exemple de formulaire basique</h3>
 </html>
 
-<script>
+<script lang="ts">
+  // Ici nous importons les composants acordéon et boutton de SMUI pour l'exemple N°2
+  import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';    //npm install --save-dev @smui-extra/accordion
+  import Button from '@smui/button'                                             //npm install --save-dev @smui/button
 
   // Ici nous allons commencer par définir une variable pour chacun des champs du formulaire tel que :
   let name = '';
@@ -18,6 +21,12 @@
   function handleSubmit() {
     const messageText = `Name: ${name}\nEmail: ${email}\nMessage: ${message}\nMot de passe: ${password}`;
     window.alert(messageText);
+  }
+  // Ici nous définissons une variable pour créer un compteur pour l'exemple N°2
+  let counter = 0;
+  // Ici nous définissons une fonction pour incrémenter le compteur dans l'exemple N°2
+  function count(){
+      counter++;
   }
 </script>
 
@@ -74,23 +83,35 @@ Un peu de style pour pas que ça pique les yeux
   }
 
   input, textarea {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     resize:none;
   }
-
-  button[type="submit"] {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  button[type="submit"]:hover {
-    background-color: #0069d9;
-  }
-
 </style>
+
+<html lang="fr">
+    <h3>2.Exemple d'utilisation de SMUI</h3>
+</html>
+
+<div class="accordion-container">
+<Accordion>                         <!-- Accordéon SMUI -->
+    <Panel>                         <!-- Créer un nouveaux dépliable -->
+        <Header>Exemple A : Texte</Header>  <!-- Titre -->
+        <Content>                   <!-- Contenu : il est possible de mettre n'importe quoi dans un dépliable (image, texte, boutons etc...)-->
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </Content>
+    </Panel>
+    <Panel>
+        <Header>Exemple B : Image</Header>
+        <Content>
+            <img src="/scarli.png" height="512" width="512"/>
+        </Content>
+    </Panel>
+    <Panel>
+        <Header>Exemple C : Bouton/Script</Header>
+        <Content>
+            Compteur : {counter}  <!-- On récupère la variable js "counter" grace aux opérateurs { }, ici pas besoins d'utiliser "$" car nous somme dans l'html et non le js -->
+            <br>
+            <Button variant="raised" on:click={count}>Incrémenter</Button> <!-- Le boutton SMUI appele la foncion "count" que nous avons définis précédemment dans le js -->
+        </Content>
+    </Panel>
+</Accordion>
+</div>
